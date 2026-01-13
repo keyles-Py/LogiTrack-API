@@ -22,3 +22,12 @@ Logical design
 * Business Logic: I developed a custom validation to ensure that deliveries are not assigned to vehicles undergoing maintenance.
 * Admin Customization: We configure the administrative panel for quick fleet management.
 
+### based on these diagrams, I created the models using Django and used them via the Django admin page also implemetating the logic to avoid assigning a delivery to a vehicle that is in maintenance.
+
+## Day 2: 13 Jan 2026 - Phase 2: Building the RESTful API
+
+- DRF Integration: I installed and configured Django REST Framework to transform the project into a decoupled API.
+
+- Nested Serializers: I implemented nested serialization to improve the data consumption experience (DX), allowing vehicle details to be obtained in the same delivery request.
+
+- API Safety: I confirmed that the business rules defined in Phase 1 remain intact when interacting through REST endpoints.
