@@ -31,3 +31,23 @@ Logical design
 - Nested Serializers: I implemented nested serialization to improve the data consumption experience (DX), allowing vehicle details to be obtained in the same delivery request.
 
 - API Safety: I confirmed that the business rules defined in Phase 1 remain intact when interacting through REST endpoints.
+
+## Day 3: 15 Jan 2026 - Phase 3: Containerization & Infrastructure and testing
+
+Docker Integration: I implemented a Dockerfile to standardize the execution environment.
+
+Orchestration: I used Docker Compose to set up a microservices ecosystem. (App + DB).
+
+Production Grade DB: I migrated from SQLite to PostgreSQL, configuring volumes for data persistence.
+
+Environment Variables: I implemented the use of .env files to decouple sensitive configuration from the source code.
+
+Principle of least privilege: I ensured that database credentials are not tracked in version control (Git), following OWASP and Django security best practices.
+
+Container Management: I learned how to interact with isolated services using the docker-compose exec command. I understood that the database in Postgres lives in a separate ecosystem and that migrations must be executed within the context of the application container to synchronize the ORM with the actual database engine.
+
+Automated Testing: I implemented my first APITestCase to ensure that business rules are unbreakable.
+
+TDD Mindset: I learned that testing is not a waste of time, but an investment in stability. Validating expected failures (such as the vehicle in maintenance) is as important as validating success.
+
+Isolated Testing: The tests are run in an ephemeral environment within Docker, ensuring that the production database is not contaminated with test data.
