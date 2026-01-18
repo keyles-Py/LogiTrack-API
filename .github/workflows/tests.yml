@@ -1,0 +1,39 @@
+name: Continuous Integration - LogiTrack
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create .env file
+        run: |
+          echo "POSTGRES_DB=logitrack_test" >> .env
+          echo "POSTGRES_USER=user_test" >> .env
+          echo "POSTGRES_PASSWORD=pass_test" >> .env
+          echo "DATABASE_URL=postgres://user_test:pass_test@db:5432/logitrack_test" >> .env
+          echo "SECRET_KEY=ci-test-key-123" >> .env
+          echo "DEBUG=True" >> .env
+
+      - name: Build and run Docker containers
+        run: docker-compose up -d --build
+
+      - name: Sleep for 10 seconds
+        run: sleep 10
+
+      - name: Run Migrations
+        run: docker-compose exec -T web python manage.py migrate
+
+      - name: Run Tests
+        run: docker-compose exec -T web python manage.py test
+
+      - name: Stop containers
+        run: docker-compose down
