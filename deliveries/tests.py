@@ -3,7 +3,7 @@ from django.test import TestCase
 # Create your tests here.
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from django.contrib.auth.models import User
 from .models import Delivery
 from vehicles.models import Vehicle
@@ -12,7 +12,7 @@ class DeliveryTest(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="testuser", password="password123")
 
-        self.client.login(username='testuser', password='password123')
+        #self.client.login(username='testuser', password='password123')
 
         self.vehicle_ok = Vehicle.objects.create(
             plate="ABC-123", model="Tesla Semi", status="available"
@@ -20,6 +20,7 @@ class DeliveryTest(APITestCase):
         self.vehicle_bad = Vehicle.objects.create(
             plate="BAD-666", model="Old Truck", status="maintenance"
         )
+        self.client.force_authenticate(user=self.user)
     def test_create_delivery_with_maintenance_vehicle_fails(self):
         url = '/api/deliveries/'
         data = {
