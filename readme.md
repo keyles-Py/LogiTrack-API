@@ -51,3 +51,21 @@ Automated Testing: I implemented my first APITestCase to ensure that business ru
 TDD Mindset: I learned that testing is not a waste of time, but an investment in stability. Validating expected failures (such as the vehicle in maintenance) is as important as validating success.
 
 Isolated Testing: The tests are run in an ephemeral environment within Docker, ensuring that the production database is not contaminated with test data.
+
+## Day 4: 17 Jan 2026 - Phase 4: Interactive Documentation, JWT Authentication & Permissions
+
+OpenAPI 3.0: I implemented drf-spectacular to generate a standardized API schema.
+
+Self-Documented Code: I realized that a good backend not only works, but is also easy to use. Interactive documentation with Swagger reduces friction between the backend and frontend teams.
+
+Interactive Testing: Now the QA or Frontend team can test business logic (such as blocking vehicles undergoing maintenance) directly from the documentation UI.
+
+Stateless Auth: I implemented JSON Web Tokens (JWT) to handle authentication without sessions on the server, ideal for scalability.
+
+Granular Permissions: I differentiated between public read permissions and actions restricted to administrators (Staff) by overwriting get_permissions.
+
+Security Best Practices: I learned how to manage access and refresh tokens to maintain API security without forcing the user to log in constantly.
+
+Bearer Token Authentication: I implemented the industry standard for sending JWT credentials in HTTP headers.
+
+Performance Tuning (N+1 Problem): I used select_related to optimize database queries using SQL JOINs, drastically reducing API latency on large lists.
