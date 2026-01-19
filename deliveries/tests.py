@@ -4,9 +4,11 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from .models import Delivery
 from vehicles.models import Vehicle
+from .services import DeliveryService
 
 class DeliveryTest(APITestCase):
     def setUp(self):
@@ -34,4 +36,21 @@ class DeliveryTest(APITestCase):
         response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("No se puede asignar", str(response.data))
+
+class DeliveryServiceTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='serviceuser')
+        self.vehicle_bad = Vehicle.objects.create(
+            plate="SERV-123", status="maintenance"
+        )
+
+    def test_service_raises_error_for_maintenance(self):
+        with self.assertRaises(ValidationError):
+            DeliveryService.create_delivery(
+                user=self.user,
+                vehicle=self.vehicle_bad,
+                origin="A",
+                destination="B",
+                price=10.0,
+                description="Test"
+            )

@@ -5,7 +5,10 @@ services:
       - postgres_data:/var/lib/postgresql/data
     env_file:
       - .env
-
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -17,6 +20,15 @@ services:
       - .env
     depends_on:
       - db
+      - redis
+  worker:
+    build: .
+    command: celery -A logitrackApi worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
 
 volumes:
   postgres_data:

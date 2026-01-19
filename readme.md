@@ -69,3 +69,25 @@ Security Best Practices: I learned how to manage access and refresh tokens to ma
 Bearer Token Authentication: I implemented the industry standard for sending JWT credentials in HTTP headers.
 
 Performance Tuning (N+1 Problem): I used select_related to optimize database queries using SQL JOINs, drastically reducing API latency on large lists.
+
+## Day 4 18 Jan 2026 - Phase 5: Continuous Integration (CI) and Service Layer Pattern
+
+GitHub Actions: I implemented an automated workflow that triggers on every commit.
+
+Ephemeral Environments: I configured the pipeline to build the entire Docker environment in the cloud, ensuring that tests pass in an environment identical to production.
+
+Quality Gate: I established a quality barrier where code with logical errors is automatically blocked, complying with modern software development standards.
+
+Separation of Concerns: I implemented a layer of services to decouple the business logic from the infrastructure components (Views/Serializers).
+
+Maintainability: I reduced the complexity of serializers, allowing each class to have a single responsibility (Single Responsibility Principle).
+
+Scalable Architecture: This pattern prepares the application for growth, allowing business rules to be consumed by multiple interfaces (API, CLI, Tasks).
+
+## Day4 18 Jan 2026 - phase 5: Asynchronous Tasks
+
+Task Queues: I implemented Celery with Redis to handle processes outside the request-response cycle.
+
+Background Processing: I understood the difference between synchronous (API) and asynchronous (Workers) tasks.
+
+Infrastructure Orchestration: I expanded the Docker network to include a Message Broker (Redis) and a processing node (Celery Worker).
