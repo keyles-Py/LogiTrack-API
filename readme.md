@@ -84,10 +84,22 @@ Maintainability: I reduced the complexity of serializers, allowing each class to
 
 Scalable Architecture: This pattern prepares the application for growth, allowing business rules to be consumed by multiple interfaces (API, CLI, Tasks).
 
-## Day4 18 Jan 2026 - phase 5: Asynchronous Tasks
+## Day 4 18 Jan 2026 - phase 5: Asynchronous Tasks
 
 Task Queues: I implemented Celery with Redis to handle processes outside the request-response cycle.
 
 Background Processing: I understood the difference between synchronous (API) and asynchronous (Workers) tasks.
 
 Infrastructure Orchestration: I expanded the Docker network to include a Message Broker (Redis) and a processing node (Celery Worker).
+
+## Day 5 20 Jan 2026 - Phase 6: Performance, Caching and Production Readiness
+
+API Caching: I implemented Redis as a cache layer to reduce the load on the PostgreSQL database, improving response times for frequently read data.
+
+Data Optimization: I reinforced the use of select_related and learned about prefetch_related to avoid the N+1 query problem.
+
+WSGI Servers: I replaced the development server with Gunicorn to support real concurrency.
+
+Security Hardening: I implemented security configurations to prevent information leaks and common attacks.
+
+Environment Integrity: I ensured that the system is configurable using environment variables, separating the infrastructure from the code.

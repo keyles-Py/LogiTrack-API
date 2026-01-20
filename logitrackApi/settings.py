@@ -27,10 +27,15 @@ SECRET_KEY = config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, )
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -67,6 +72,16 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Sistema de gestión de logística y entregas',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        'OPTION': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
 }
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'

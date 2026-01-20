@@ -11,7 +11,7 @@ services:
       - "6379:6379"
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn logitrackApi.wsgi:application --bind 0.0.0.0:8000 --workers 3
     volumes:
       - .:/app
     ports:
