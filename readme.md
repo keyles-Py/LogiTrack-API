@@ -75,6 +75,10 @@ The project is currently deployed on AWS EC2. The deployment pipeline is automat
 
 3. Upon success, the application is updated on the AWS instance using Docker Compose.
 
+## Development Journey
+I maintained a daily log of the technical challenges and decisions made during the construction of this API. 
+You can read the full dev diary here: [JOURNAL.md](./JOURNAL.md)
+
 ## Contact
 
 Keiner Mendoza - [linkedin](https://www.linkedin.com/in/keinermendoza/) - [E-mail](keynerismo@gmail.com) - [Project Link](https://github.com/keyles-Py/LogiTrack-API)
